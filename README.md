@@ -23,7 +23,8 @@
 
 
 ### 요구사항 명세서
-<img scr="C:\Users\A\Desktop\프로젝트\그룹웨어GURUBEE\요구사항명세서.PNG" width="60" height="100"/>
+![요구사항 명세서](https://user-images.githubusercontent.com/58289304/200155627-c58a1b1f-fa0e-461b-9743-91ebf77921ab.PNG)
+
 
 ### ER-Diagram
 
