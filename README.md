@@ -57,3 +57,6 @@
    
 <br>
 <br>
+
+### 📌 UseCase-Diagram
+![전자결재 유스케이스](https://user-images.githubusercontent.com/58289304/200157058-b1b8ff4d-e16a-4351-80bb-5723d61281e6.png)
