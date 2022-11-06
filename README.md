@@ -45,7 +45,7 @@
    
 
 ### 📌 ERD-Cloud
-![ERDCloud](https://user-images.githubusercontent.com/58289304/200156544-78983daa-0b83-4023-a1e6-3ebb2afd90f7.png)   
+![ERDCloud](https://user-images.githubusercontent.com/58289304/200156966-c8e74bf4-0522-418a-96ce-8ebaa4c08fd6.png)  
 
 <br>
 <br>
