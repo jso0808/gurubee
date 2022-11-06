@@ -10,7 +10,7 @@
 - 결재 문서 임시보관함 조회
 - 임시보관 문서 등록, 삭제
 - 결재 문서 승인, 반려 기능
-- 파일 업로드 기능
+- 파일 업로드 기능   
 
 
 
@@ -31,21 +31,21 @@
 - Apache Tomcat 9.0
 
 #### ✔ 버전 관리
-- GitHub
+- GitHub   
 
-
+   
 
 ### 📌 요구사항 명세서
-![요구사항 명세서](https://user-images.githubusercontent.com/58289304/200155627-c58a1b1f-fa0e-461b-9743-91ebf77921ab.PNG)
+![요구사항 명세서](https://user-images.githubusercontent.com/58289304/200155627-c58a1b1f-fa0e-461b-9743-91ebf77921ab.PNG)   
 
-
+   
 
 ### 📌 ERD-Cloud
-![ERDCloud](https://user-images.githubusercontent.com/58289304/200156544-78983daa-0b83-4023-a1e6-3ebb2afd90f7.png)
+![ERDCloud](https://user-images.githubusercontent.com/58289304/200156544-78983daa-0b83-4023-a1e6-3ebb2afd90f7.png)   
 
-
+   
 
 ### 📌 Class-Diagram
-![클래스다이어그램](https://user-images.githubusercontent.com/58289304/200156599-afd643e8-5aa5-4159-831e-d16a21ed39e9.png)
+![클래스다이어그램](https://user-images.githubusercontent.com/58289304/200156599-afd643e8-5aa5-4159-831e-d16a21ed39e9.png)   
 
 
