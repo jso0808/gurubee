@@ -1,7 +1,7 @@
 ##  그룹웨어 프로그램 - GURUBEE
 
-#
-#
+<br>
+<br>
 ### 📌 담당 기능: 전자 결재, DB모델링, 메인화면 구현
 ##### ✔ 전자결재 주요 기능
 - 전자결재 문서 발신, 수신함 조회
@@ -12,8 +12,8 @@
 - 임시보관 문서 등록, 삭제
 - 결재 문서 승인, 반려 기능
 - 파일 업로드 기능    
-#   
-#   
+<br>
+<br>
 
 ### 📌 Development Environment
 #### ✔ Front-end 
@@ -22,37 +22,37 @@
 - jQuery
 - AJAX
 - Bootstrap 5.2
-#
+
 #### ✔ Back-end
 - SQL Oracle
 - Servlet & JSP
 - JAVA 1.8
-#
+
 #### ✔ Server
 - Apache Tomcat 9.0
-#
+
 #### ✔ 버전 관리
 - GitHub    
    
-#   
-#     
+<br>
+<br>
 
 ### 📌 요구사항 명세서
 ![요구사항 명세서](https://user-images.githubusercontent.com/58289304/200155627-c58a1b1f-fa0e-461b-9743-91ebf77921ab.PNG)   
    
-#   
-#    
+<br>
+<br>
    
 
 ### 📌 ERD-Cloud
 ![ERDCloud](https://user-images.githubusercontent.com/58289304/200156544-78983daa-0b83-4023-a1e6-3ebb2afd90f7.png)   
-   
-#   
-#     
+
+<br>
+<br>
     
 ### 📌 Class-Diagram
 ![클래스다이어그램](https://user-images.githubusercontent.com/58289304/200156599-afd643e8-5aa5-4159-831e-d16a21ed39e9.png)     
    
    
-#   
-#     
+<br>
+<br>
