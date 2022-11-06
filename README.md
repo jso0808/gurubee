@@ -1,13 +1,14 @@
 ## 그룹웨어 프로그램 - GURUBEE
+### 담당 기능: 전자 결재 
 
 
 ### Development Environment
 #### Front-end 
-- HTML,CSS
+- HTML5, CSS
 - Javascript
 - jQuery
 - AJAX
-- Bootstrap
+- Bootstrap 5.2
 
 #### Back-end
 - SQL Oracle
@@ -22,7 +23,7 @@
 
 
 ### 요구사항 명세서
-
+<img scr="C:\Users\A\Desktop\프로젝트\그룹웨어 GURUBEE\요구사항 명세서.PNG" width="60" height="100"/>
 
 ### ER-Diagram
 
