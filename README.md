@@ -25,7 +25,7 @@
 - Bootstrap 5.2
 
 #### ✔ Back-end
-- SQL Oracle
+- SQL Oracle 18
 - Servlet & JSP
 - JAVA 1.8
 
