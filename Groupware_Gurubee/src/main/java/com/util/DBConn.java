@@ -12,7 +12,7 @@ public class DBConn {
 	
 	public static Connection getConnection() {
 		// String url = "jdbc:oracle:thin:@127.0.0.1:1521:ORCL";  // 11g
-		String url = "jdbc:oracle:thin:@//211.238.142.74:1521/XE"; // 12C 이상
+		String url = "jdbc:oracle:thin:@//127.0.0.1:1521/XE"; // 12C 이상
 		String user = "gb";
 		String pwd = "gb$!";
 		

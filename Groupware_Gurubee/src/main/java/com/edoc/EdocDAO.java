@@ -97,16 +97,15 @@ public class EdocDAO {
 				return;
 			}
 			
-			sql = "INSERT INTO E_APPROVER(apper_num, app_num, id, app_result, memo, app_level, app_date) "
-				+ " VALUES(APPVER_SEQ.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE)";
+			sql = "INSERT INTO E_APPROVER(apper_num, app_num, id, app_result, app_level, app_date) "
+				+ " VALUES(APPVER_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE)";
 			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, app_num);
 			pstmt.setString(2, empdto.getId_apper());
 			pstmt.setInt(3, 0); // 대기
-			pstmt.setString(4, empdto.getMemo());
-			pstmt.setInt(5, empdto.getApp_level());
+			pstmt.setInt(4, empdto.getApp_level());
 			
 			pstmt.executeUpdate();
 			
@@ -436,12 +435,6 @@ public class EdocDAO {
 		String sql;
 		
 		try {
-			/*
-			sql = "SELECT app_num, app_doc, result, title, TO_CHAR(app_date,'YYYY-MM-DD')app_date, temp"
-				+ " FROM E_APPROVAL "
-				+ " WHERE (temp=1 OR temp=-1) AND (id IN ?) "
-				+ " ORDER BY app_date DESC ";
-			*/
 			sql = "select al.app_num, al.app_doc, TO_CHAR(al.app_date,'YYYY-MM-DD')app_date, al.id, "
 					+ "	al.title, resultList, apperList, al.temp "
 					+ " FROM E_APPROVAL al "
@@ -1670,7 +1663,7 @@ public class EdocDAO {
 	
 	// 내가 수신자인(내 사번 있는) 결대 대기중인 문서 리스트 (메인)
 	public int listReadyEApproverReceiver(String apperId) {
-		List<EdocDTO> list = new ArrayList<>();
+		// List<EdocDTO> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
@@ -1704,7 +1697,7 @@ public class EdocDAO {
 			
 			while(rs.next()) {
 				EdocDTO edocdto = new EdocDTO();
-				String[] rr, aa, ii, tt;
+				String[] rr, aa, ii;
 				
 				edocdto.setApp_num(rs.getInt("app_num"));
 				edocdto.setApp_doc(rs.getString("app_doc"));
@@ -1735,14 +1728,6 @@ public class EdocDAO {
 				if(edocdto.getResult().indexOf("대기")!=-1 && edocdto.getResult_id().equals(apperId)) {
 					cnt++;
 				}
-				/*
-				if(edocdto.getResult().equals("1")) {
-					if(edocdto.getResult_id().equals(apperId)) {
-						cnt++;
-					}
-				}
-				*/
-				
 			}
 			
 		} catch (Exception e) {

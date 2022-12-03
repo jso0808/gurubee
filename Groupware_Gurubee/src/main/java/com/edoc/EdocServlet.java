@@ -96,75 +96,81 @@ public class EdocServlet extends MyUploadServlet {
 			
 	}
 	
+	// 작성한 결재문서의 폼 데이터 가져오기
 	protected void writeForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = "/WEB-INF/views/edoc/write.jsp";
+		// 문서 리스트로 돌아갈 때 페이지
 		String size = req.getParameter("size");
-		
+		// mode: 현재 작업이 새 문서 작성 상태(write)임을 표시
 		req.setAttribute("mode", "write");
 		req.setAttribute("size", size);
 		forward(req, resp, path);
 	}
 	
-	// 결재문서 등록 폼
+	// 작성한 결재문서 등록
 	protected void writeSubmit(HttpServletRequest req, HttpServletResponse resp, int temp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		HttpSession session = req.getSession();
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String cp = req.getContextPath();
 		
+		// GET방식으로 접근했다면 다시 문서발신함으로 돌아간다.
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			resp.sendRedirect(cp + "/edoc/list_send.do");
 			return;
 		}
 		
 		try {
-			// 전자결재문서 등록
+			// 전자결재문서 등록 시 사용할 DTO 객체 생성
 			EdocDTO edocdto = new EdocDTO();
 			
+			// 결재문서 dto 데이터들 setter
 			edocdto.setId_write(info.getId());
 			edocdto.setApp_doc(req.getParameter("edocSelect"));
 			edocdto.setDoc_form(req.getParameter("content"));
 			edocdto.setTitle(req.getParameter("title"));
 			edocdto.setTemp(temp);
 			
-			// Part p = req.getPart("selectFile");
+			// 파일 업로드를 위한 map 변수
 			Map<String, String[]> map = doFileUpload(req.getParts(), pathname);
+			// 작성한 폼데이터에서 업로드한 파일이 존재하면
 			if(map != null) {
 				String[] saveFiles = map.get("saveFilenames");
 				String[] originalFiles = map.get("originalFilenames");
 				edocdto.setSaveFiles(saveFiles);
 				edocdto.setOriginalFiles(originalFiles);
 			}
-			
+			// 전자결재문서 정보를 등록하는 DAO 함수 실행.
 			dao.insertEApproval(edocdto);
 			
-			
-			String app_id[] = req.getParameterValues("empId"); // 수신자 사번
+			// 결재문서 결재자들의 사번을 저장할 문자열 변수
+			String app_id[] = req.getParameterValues("empId"); 
 
-			// 전자결재문서 결재자 등록 - 수신자 아이디 갯수만큼 반복
+			// 전자결재문서의 결재자 등록. 수신자 인원 수 만큼 반복
 			for (int i = 0; i < app_id.length; i++) {
 				if (!(app_id[i] == null || app_id[i].length() == 0)) {
 					EdocEmpDTO empdto = new EdocEmpDTO();
 					empdto.setId_apper(app_id[i]);
+					// 결재레벨은 1단계부터 1씩 증가하여 setter
 					empdto.setApp_level(i + 1);
-					empdto.setMemo("memo");
-
+					// 문서의 결재자를 등록하는 DAO 함수 힐행
 					dao.insertEApprover(empdto);
-
 				}
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		// 문서 발신함으로 리다이렉트
 		resp.sendRedirect(cp + "/edoc/list_send.do");
 	}
 	
+	// 수신자 사원 리스트 - AJAX:text
 	protected void listEmp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 수신자 사원 리스트 - AJAX:text
 		EdocDAO dao = new EdocDAO();
 		
 		try {
+			// 파라미터로 넘어온 직급코드 데이터를 저장할 변수
 			int pos_code = Integer.parseInt(req.getParameter("pos_code"));
 			// 특정 직급 사원 리스트 가져오기
 			List<EdocEmpDTO> list = dao.posEmpList(pos_code);
@@ -182,13 +188,13 @@ public class EdocServlet extends MyUploadServlet {
 		resp.sendError(400);
 	}
 	
-	
+	// 문서구분에 따른 문서폼 가져오기 - AJAX:text 
 	protected void getEdocForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 문서폼 가져오기 - AJAX:text 
 		EdocDAO dao = new EdocDAO();
 		EdocFormDTO formdto = null;
 		
 		try {
+			// 선택된 문서 구분 데이터를 저장할 변수
 			String form = req.getParameter("edoc");
 			
 			formdto = dao.findByForm(form);
@@ -204,50 +210,55 @@ public class EdocServlet extends MyUploadServlet {
 		resp.sendError(400);
 	}
 
-	// 결재문서 발신함 리스트
+	// 결재문서 발신함 리스트 가져오기
 	protected void listSend(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		MyUtil util = new MyUtilBootstrap();
 		String cp = req.getContextPath();
 		String page = req.getParameter("page");
 		
+		// 로그인 세션 정보 가져오기
 		HttpSession session = req.getSession();
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		try {
-			
+			// 페이징 처리를 위한 현재 페이지 번호 저장
 			int current_page = 1;
 			if(page != null) {
 				current_page = Integer.parseInt(page);
 			}
 			
-			// 날짜 myDate, 문서구분 edocSelect
+			// 조건 검색을 위한 변수: 날짜-myDate, 문서구분-edocSelect
 			String myDate = req.getParameter("myDate");
 			String edoc = req.getParameter("edocSelect");
 			
-			// 전체 데이터 갯수
-			int dataCount=0;
+			// 데이터(결재문서) 갯수 초기화
+			int dataCount = 0;
 	
-			// 조건 없을 때
-			if(myDate==null && edoc==null) {
+			// if:검색할 조건이 없을 때, else: 검색할 조건이 있을 때
+			if (myDate == null && edoc == null) {
+				// 로그인 세션의 아이디가 작성자인 결재문서 갯수 카운트
 				dataCount = dao.edocCount(info.getId());
-			} else {
-				if(edoc!=null) {
+			} else { 
+				if (edoc != null) { // 문서구분 조건 존재
 					edoc = URLDecoder.decode(edoc, "utf-8");
-				} else {
+				} else { // 문서구분 조건이 없으면 length=0 으로 초기화
 					edoc = "";
 				}
-				if(myDate!=null) {
+				if (myDate != null) { // 날짜 조건 존재
 					myDate = URLDecoder.decode(myDate, "utf-8");
-				} else {
+				} else { // 날짜 조건이 없으면 length=0 으로 초기화
 					myDate = "";
 				}
+				// 검색할 조건이 하나 이상 있으면 실행. 조건 존재 여부는 조건변수.length>0 로 판단.
 				dataCount = dao.edocCount(info.getId(), edoc, myDate);
 			}
 			
-			// 전체 페이지 수
+			// 한 페이지의 최대 문서 갯수 설정
 			int size = 5;
+			// 전체 페이지 수
 			int total_page = util.pageCount(dataCount, size);
+			// 문서 삭제 등 페이지의 변화가 생기면 
 			if(current_page > total_page) {
 				current_page = total_page;
 			}
@@ -256,21 +267,26 @@ public class EdocServlet extends MyUploadServlet {
 			int offset = (current_page - 1) * size;
 			if(offset < 0) offset = 0;
 
-			// 결재문서 리스트 가져오기
+			// 결재문서 리스트를 저장할 변수
 			List<EdocDTO> myEdocList= null;
 			
+			// 결재문서 리스트 가져오기
+			// if: 조건 검색이 없을 때, else: 조건 검색이 하나 이상 있을 때
 			if(myDate==null && edoc==null) {
 				myEdocList = dao.listEApproval(info.getId(), offset, size);
 			} else {
 				myEdocList = dao.listEApproval(info.getId(), offset, size, edoc, myDate);
 			}
 			
-			// 페이징 처리
+			// 결재문서 발신함 리스트의 주소를 저장하는 변수.
 			String listUrl = cp + "/edoc/list_send.do";
+			// 결재문서 상세보기의 주소를 저장하는 변수. 
 			String articleUrl = cp + "/edoc/article.do?page=" + current_page;
 			
+			// 페이징 처리 결과를 저장하는 변수. 현재 페이지 번호, 전체 페이지 수, 링크 설정할 주소를 인자로 넘긴다.
 			String paging = util.paging(current_page, total_page, listUrl);
-	
+			
+			// list_send.jsp 포워딩 시 전달할 데이터
 			req.setAttribute("list", myEdocList);
 			req.setAttribute("page", current_page);
 			req.setAttribute("total_page", total_page);
@@ -282,12 +298,12 @@ public class EdocServlet extends MyUploadServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		// list_send.jsp 포워딩
 		forward(req, resp, "/WEB-INF/views/edoc/list_send.jsp");
 	}
 	
 	
-	// 결재문서 수신함 리스트 
+	// 결재문서 수신함 리스트 가져오기
 	protected void listReceive(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		MyUtil util = new MyUtilBootstrap();
@@ -362,7 +378,7 @@ public class EdocServlet extends MyUploadServlet {
 	}
 	
 	
-	// 글보기
+	// 결재 문서 글 보기
 	protected void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		
@@ -397,35 +413,41 @@ public class EdocServlet extends MyUploadServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// resp.sendRedirect(cp+"/edoc/list_send");
-		
 	}	
 
-	// 결재하기 - AJAX:JSON
+	// 전자문서 결재하기(수신자) - AJAX:JSON
 	protected void insertResult(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		
+		// 결재 가능 여부, 불가능 사유를 저장하는 문자열 변수
 		String resultMessage = null;
+		// AJAX 통신의 결과를 저장하는 문자열 변수
 		String state = "false";
 
 		try {
+			// 로그인된 수신자의 세션 정보 가져오기
 			HttpSession session = req.getSession();
 			SessionInfo info = (SessionInfo) session.getAttribute("member");
 			
-			
+			// 결재 문서 번호를 저장할 변수
 			int app_num = Integer.parseInt(req.getParameter("app_num"));
+			// 선택된 결재하기 데이터를 저장할 변수. 1:승인, 0:반려.
 			int app_result = Integer.parseInt(req.getParameter("app_result"));
+			// 수신자의 결재단계를 저장할 변수
 			int app_level = 0;
 			
-			// 나의 결재단계 가져오기
+			// 수신자의 결재단계 정보 가져오기
 			app_level = dao.readAppLevel(info.getId(), app_num);
-			// 1vL 결재자
+			// if:결재단계가 1단계 일 때, else:결재단계가 1단계 초과일 때 
 			if(app_level == 1) {
+				// 결재단계:1단계 수신자의 결재 등록
 				resultMessage = dao.insertEdocMyResult1(app_num, info.getId(), app_result);
 			} else {
+				// 결재단계:2단계 이상 수신자의 결재 등록
 				resultMessage = dao.insertEdocMyResultOver1(app_num, info.getId(), app_result, app_level);
 			}
 			
+			// AJAX 통신이 정상적으로 끝났으므로 true로 초기화
 			state = "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -435,16 +457,16 @@ public class EdocServlet extends MyUploadServlet {
 		job.put("state", state);
 		job.put("msg", resultMessage);
 		
+		// 한글깨짐 방지를 위한 인코딩
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter out = resp.getWriter();
+		// json 객체를 문자열로 변환
 		out.print(job.toString());
-
 	}
 	
 	// 임시보관함 글 리스트 출력
 	protected void listTemp(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		try {
-			
 			EdocDAO dao = new EdocDAO();
 			MyUtil util = new MyUtilBootstrap();
 			String cp = req.getContextPath();
@@ -527,38 +549,7 @@ public class EdocServlet extends MyUploadServlet {
 		
 	}
 	
-	// AJAX
-	protected void updateCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		EdocDAO dao = new EdocDAO();
-		
-		
-		String state="true";
-		try {		
-			int app_num = Integer.parseInt(req.getParameter("app_num"));
-			
-			boolean b2 = false;
-			
-			// 모든 결재결과 0:대기 인지 확인
-			b2 = dao.readEdocResult(app_num);
-			
-			if(b2==false) {
-				state = "false";
-			}	
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		JSONObject job = new JSONObject();
-		job.put("state", state);
-		
-		resp.setContentType("text/html; charset=utf-8");
-		PrintWriter out = resp.getWriter();
-		out.print(job.toString());
-	}
-	
-	// 문서 수정 폼
+	// 결재문서 수정 시 작성했던 문서 내용 가져오기
 	protected void updateForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		
@@ -571,21 +562,24 @@ public class EdocServlet extends MyUploadServlet {
 		
 		try {
 			int app_num = Integer.parseInt(req.getParameter("app_num"));
+			// 작성했던 문서 내용 가져오기
 			EdocDTO edocdto = dao.readEdoc(app_num);
 			List<EdocDTO> filedto = new ArrayList<>();
 			
 			boolean b1= false, b2 = false;
 			
-			// 문서 작성자 확인
+			// 로그인한 사원 본인이 작성한 문서인지 확인
 			b1 = dao.readEdocWriteId(info.getId(), app_num);
-			// 모든 결재결과 0:대기 인지 확인
+			// 모든 결재결과가 0:대기 상태인지 확인
 			b2 = dao.readEdocResult(app_num);
 			
+			// 작성자가 아니거나, 결재상태가 하나라도 존재하면
 			if(b2==false || b1==false) {
 				resp.sendRedirect(cp+"/edoc/list_send.do?page="+page);
 				return;
-			}	
+			}
 			
+			// 업로드했던 파일 리스트 가져오기
 			filedto = dao.listEdocFile(app_num);
 			
 			req.setAttribute("dto", edocdto);
@@ -602,7 +596,7 @@ public class EdocServlet extends MyUploadServlet {
 		resp.sendRedirect(cp+"/edoc/list_send.do?page="+page);
 	}
 	
-	// 문서 수정
+	// 결재문서 내용 수정하기
 	protected void updateSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		
@@ -648,7 +642,7 @@ public class EdocServlet extends MyUploadServlet {
 		resp.sendRedirect(cp+"/edoc/list_send.do?page="+page);
 	}
 	
-	
+	// 임시저장할 결재 문서의 폼 데이터 가져오기
 	protected void tempForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		EdocDAO dao = new EdocDAO();
 		
@@ -687,11 +681,9 @@ public class EdocServlet extends MyUploadServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// resp.sendRedirect(cp+"/edoc/list_temp.do?page="+page);
-		
 	}
 	
+	// 작성한 결재문서 임시 저장
 	protected void tempSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		HttpSession session = req.getSession();
@@ -714,9 +706,6 @@ public class EdocServlet extends MyUploadServlet {
 			// 파일 여부 확인
 			Map<String, String[]> map = doFileUpload(req.getParts(), pathname);
 			if (map != null) {
-				//FileManager.doFiledelete(pathname, edocdto.getSaveFilename());
-				//dao.deleteFile(edocdto.getApp_num());
-				
 				String[] saveFiles = map.get("saveFilenames");
 				String[] originalFiles = map.get("originalFilenames");
 				edocdto.setSaveFiles(saveFiles);
@@ -815,10 +804,17 @@ public class EdocServlet extends MyUploadServlet {
 		String cp = req.getContextPath();
 
 		try {
-
 			int fileNum = Integer.parseInt(req.getParameter("fileNum"));
 			int app_num = Integer.parseInt(req.getParameter("app_num"));
 			EdocDTO dto = dao.edocFile(fileNum);
+			
+			List<EdocEmpDTO> empdto = new ArrayList<>();
+			
+			if(dto == null) {
+				resp.sendRedirect(cp+"/edoc/list_send");
+				return;
+			}
+			
 			// 작성자 일치 여부 확인
 			boolean b1= false;
 			
@@ -830,27 +826,30 @@ public class EdocServlet extends MyUploadServlet {
 				return;
 			}	
 			
-			// 삭제
+			// 파일 삭제
 			FileManager.doFiledelete(pathname, dto.getSaveFilename());
 			
 			dao.deleteFile(app_num);
 			
+			// 문서, 결재자 리스트 가져오기. readEdoc, readEdocEmp
+			empdto = dao.readEdocApper(app_num);
+			dto = dao.readEdoc(app_num);
+			
 			req.setAttribute("page", page);
 			req.setAttribute("dto", dto);
 			req.setAttribute("mode", "update");
+			req.setAttribute("empdto", empdto);
 			
-			resp.sendRedirect(cp+"/edoc/list_send.do");
-
+			forward(req, resp, "/WEB-INF/views/edoc/write.jsp");
 			return;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// resp.sendRedirect(cp+"/edoc/list_send.do");
 
 	}
 	
-	// 메인. AJAX-JSON 오늘 작성된 결재문서 수신 카운트
+	// 메인화면 AJAX-JSON. 오늘 수신된 결재문서 갯수 카운트
 	protected void countTodayEdoc(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 		
@@ -858,15 +857,16 @@ public class EdocServlet extends MyUploadServlet {
 		String state = "false";
 
 		try {
-			
+			// 파라미터로 넘어온 로그인 세션의 사번 데이터 저장
 			String apperId = req.getParameter("apperId");
 			
-			// 내 사번이 있는 오늘 작성된 결재문서 가져오기
+			// 내 사번이 있는 오늘 작성된 결재문서 리스트 가져오기
 			List<EdocDTO> list = dao.listTodayEApproverReceiver(apperId);
-			//// 내 사번이 있는 모든 결재문서 가져오기  dao.listEApproverReceiver(apperId);
 			
+			// 리스트 길이 = 문서 갯수
 			cnt = list.size();
 			
+			// 
 			state = "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -887,17 +887,19 @@ public class EdocServlet extends MyUploadServlet {
 		EdocDAO dao = new EdocDAO();
 		
 		int cnt = 0;
+		// AJAX 통신의 결과를 저장하는 문자열 변수
 		String state = "false";
 
 		try {
+			// 로그인된 세션의 사번 데이터 저장
 			HttpSession session = req.getSession();
 			SessionInfo info = (SessionInfo) session.getAttribute("member");
-			
 			String apperId = info.getId();
 			
 			// 내 사번이 있는 결재대기중인 모든 결재문서 가져오기
 			cnt = dao.listReadyEApproverReceiver(apperId);
 			
+			// AJAX 통신이 정상적으로 끝났으므로 true
 			state = "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -910,9 +912,9 @@ public class EdocServlet extends MyUploadServlet {
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter out = resp.getWriter();
 		out.print(job.toString());
-
 	}	
-	// 메인. AJAX-HTML 발신 문서 리스트 가져오기
+	
+	// 메인화면 AJAX-HTML. 발신 문서 리스트 가져오기
 	protected void mainListSend(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		EdocDAO dao = new EdocDAO();
 			
@@ -932,8 +934,6 @@ public class EdocServlet extends MyUploadServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-	
 	
 }

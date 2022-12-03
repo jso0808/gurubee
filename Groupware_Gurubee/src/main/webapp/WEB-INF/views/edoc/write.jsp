@@ -198,7 +198,7 @@ $(function(){
     		oEditors.getById["ir1"].exec("SET_IR", ['']);
     		oEditors.getById["ir1"].exec("PASTE_HTML", [doc_form]);
     		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-    	}
+        }
         
         ajaxFun(url, "post", query, "text", fn);
 	});
@@ -433,9 +433,9 @@ function deleteFile(fileNum, app_num) {
 					</div>
 
 					<input type="hidden" name="app_num" value="${dto.app_num }">
-					<input type="hidden" name="page" value="${page}"> <input
-						type="hidden" name="size" value="${size}"> <input
-						type="hidden" name="mode" value="${mode}">
+					<input type="hidden" name="page" value="${page}"> 
+					<input type="hidden" name="size" value="${size}"> 
+					<input type="hidden" name="mode" value="${mode}">
 					<c:if test="${mode=='update'}">
 						<input type="hidden" name="temp" value="-1">
 					</c:if>
@@ -469,7 +469,6 @@ function deleteFile(fileNum, app_num) {
 				</div>
 			</div>
 		</div>
-
 		<!-- 사원검색 모달 end -->
 
 	</main>
@@ -480,17 +479,18 @@ function deleteFile(fileNum, app_num) {
 
 	<jsp:include page="/WEB-INF/views/layout/staticFooter.jsp" />
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/se2/js/service/HuskyEZCreator.js"
-		charset="utf-8"></script>
-	<script type="text/javascript">
-
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/se2/js/service/HuskyEZCreator.js"
+	charset="utf-8"></script>
+<script type="text/javascript">
+// 작성 일자 세팅하기
 const date = new Date();
 
 const year = date.getFullYear();
 const month = date.getMonth() + 1;
 const day = date.getDate();
 
+// 네이버 에디터 불러오기
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
