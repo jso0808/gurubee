@@ -1,5 +1,5 @@
 ##  그룹웨어 프로그램 - GURUBEE
-
+## 📌 https://jeongsoyeon.tistory.com/entry/ServletJSP-%EA%B7%B8%EB%A3%B9%EC%9B%A8%EC%96%B4-%EC%84%9C%EB%B9%84%EC%8A%A4-GURUBEE
 <br>
 <br>
 
