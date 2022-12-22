@@ -73,6 +73,7 @@
    - 1차 결재 대기 상태인 문서만 수정 가능
    - 수정된 문서는 수정 이력 표시 출력 
 <br>
+
 ![발신함](https://user-images.githubusercontent.com/58289304/209079290-68c49f7d-e7ac-4368-95e0-e8cd9c9e241a.png)
 <br>
 <br>
@@ -82,6 +83,7 @@
 - AJAX 방식으로 결재 처리
    - 본인 이전의 결재 상태가 대기중이거나 반려된 문서는 결재 불가
 <br>
+
 ![수신함 (2)](https://user-images.githubusercontent.com/58289304/209079352-24136dff-a435-4f1c-8e39-46d90647f59d.png)
 <br>
 <br>
