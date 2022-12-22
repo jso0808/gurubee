@@ -1,4 +1,4 @@
-##  그룹웨어 프로그램 - <img src="https://user-images.githubusercontent.com/58289304/209109327-076b6ece-0b74-4162-8b60-c10c81bea1d1.png" width="150" height="50"/>
+##  그룹웨어 프로그램 - <img src="https://user-images.githubusercontent.com/58289304/209109327-076b6ece-0b74-4162-8b60-c10c81bea1d1.png" width="150" height="30"/>
 
 ### 📌 개발 기간
 2022년 10월 14일 ~ 2022년 11월 4일 (약 3주)
