@@ -25,7 +25,6 @@
 - Javascript
 - jQuery
 - AJAX
-- Bootstrap 5.2
 #### ✔ Back-end
 - Oracle DB 18
 - Servlet & JSP
@@ -36,7 +35,7 @@
 - GitHub    
 #### ✔ 기타
 - 네이버 스마트 에디터
-- Bootstrap
+- Bootstrap 5.2
    
 <br>
 <br>
