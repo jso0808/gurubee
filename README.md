@@ -99,6 +99,7 @@
 - 첨부파일 업로드
    - 1개 이상의 다중 파일 업로드 가능
 <br>
+
 ![문서구분 ajax1](https://user-images.githubusercontent.com/58289304/209079990-5265c27b-516b-487c-8ef2-7d64a239423e.png)
 ![문서구분 ajax2](https://user-images.githubusercontent.com/58289304/209080014-a8cf93ba-7a92-4221-a664-81fe849e2b64.png)
 ![사원검색 ajax](https://user-images.githubusercontent.com/58289304/209080038-accd1c6f-d6b9-45e3-b3d7-4c0c5060ae44.png)
@@ -116,6 +117,7 @@
    - 이전 결재 결과가 승인인 문서만 결재 가능
    - 결재 불가능한 경우, 불가 사유 메시지 
 <br>
+
 ![문서보기1](https://user-images.githubusercontent.com/58289304/209079460-1ea4497f-5033-41fe-b696-5a13661ca77a.png)
 ![문서보기2](https://user-images.githubusercontent.com/58289304/209079504-d366c82f-a216-4a2d-bd68-37f03af53405.png)
 ![결재실패1](https://user-images.githubusercontent.com/58289304/209079529-0b90c367-7831-4bde-a973-5a65516abf8e.png)
@@ -129,6 +131,7 @@
 - 작성 중이던 문서를 마저 작성하여 결재 요청 가능
 - 문서 삭제 가능
 <br>
+
 ![임시보관함](https://user-images.githubusercontent.com/58289304/209079704-37e66490-b54e-4e9f-9115-8fe7aaebada9.PNG)
 ![임시문서등록1](https://user-images.githubusercontent.com/58289304/209079731-8f389b4e-dbe5-49f9-9055-a820151020a2.PNG)
 ![임시보관 발신 (2)](https://user-images.githubusercontent.com/58289304/209080291-cd42dd66-4b6e-43c8-8b7f-b6b55865e32f.png)
