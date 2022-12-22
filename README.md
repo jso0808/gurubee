@@ -111,7 +111,7 @@
 ![문서구분 ajax2](https://user-images.githubusercontent.com/58289304/209080014-a8cf93ba-7a92-4221-a664-81fe849e2b64.png)
 ![사원검색 ajax](https://user-images.githubusercontent.com/58289304/209080038-accd1c6f-d6b9-45e3-b3d7-4c0c5060ae44.png)
 ![사원검색 ajax2](https://user-images.githubusercontent.com/58289304/209083526-0d41e08b-db48-4030-9643-ad73e02bd4d4.png)
-<img src="https://user-images.githubusercontent.com/58289304/209080120-d77bc4a2-ed59-4971-9a71-bf416906b5b3.png" width="500"/>
+![파일 업로드1](https://user-images.githubusercontent.com/58289304/209080120-d77bc4a2-ed59-4971-9a71-bf416906b5b3.png)
 <img src="https://user-images.githubusercontent.com/58289304/209080139-bef76e7a-6b9b-4a51-915a-6f4ab303db2a.png" width="500" height="400"/>
 <br>
 <br>
@@ -127,9 +127,9 @@
 
 ![문서보기1](https://user-images.githubusercontent.com/58289304/209079460-1ea4497f-5033-41fe-b696-5a13661ca77a.png)
 ![문서보기2](https://user-images.githubusercontent.com/58289304/209079504-d366c82f-a216-4a2d-bd68-37f03af53405.png)
-<img src="https://user-images.githubusercontent.com/58289304/209079529-0b90c367-7831-4bde-a973-5a65516abf8e.png" width="500" height="400"/>
-<img src="https://user-images.githubusercontent.com/58289304/209079555-e46498b5-9ecb-4259-9f54-fcfbd632d32c.png" width="500" height="400"/>
-<img src="https://user-images.githubusercontent.com/58289304/209079575-17d30a3b-b95e-4753-8df9-296f696c77af.png" width="500" height="400"/>
+<img src="https://user-images.githubusercontent.com/58289304/209079529-0b90c367-7831-4bde-a973-5a65516abf8e.png" width="300" height="200"/>
+<img src="https://user-images.githubusercontent.com/58289304/209079555-e46498b5-9ecb-4259-9f54-fcfbd632d32c.png" width="300" height="200"/>
+<img src="https://user-images.githubusercontent.com/58289304/209079575-17d30a3b-b95e-4753-8df9-296f696c77af.png" width="300" height="200"/>
 <br>
 <br>
 <br>
