@@ -26,17 +26,17 @@
 - jQuery
 - AJAX
 - Bootstrap 5.2
-
 #### ✔ Back-end
 - Oracle DB 18
 - Servlet & JSP
 - JAVA 1.8
-
 #### ✔ Server
 - Apache Tomcat 9.0
-
 #### ✔ 버전 관리
 - GitHub    
+#### ✔ 기타
+- 네이버 스마트 에디터
+- Bootstrap
    
 <br>
 <br>
