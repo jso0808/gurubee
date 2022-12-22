@@ -1,8 +1,5 @@
 ##  그룹웨어 프로그램 - GURUBEE
-### 📌 GURUBEE의 전자결재 화면을 여기서 확인해보세요!
-### 📌 https://jeongsoyeon.tistory.com/entry/ServletJSP-%EA%B7%B8%EB%A3%B9%EC%9B%A8%EC%96%B4-%EC%84%9C%EB%B9%84%EC%8A%A4-GURUBEE
-<br>
-<br>
+
 
 ### 📌 담당 기능: 전자 결재 기능, DB모델링, 메인화면 구현
 ##### ✔ 전자결재 주요 기능
@@ -92,5 +89,6 @@
 ### 📌 문서 임시보관함
 ![임시보관함](https://user-images.githubusercontent.com/58289304/209079704-37e66490-b54e-4e9f-9115-8fe7aaebada9.PNG)
 ![임시문서등록1](https://user-images.githubusercontent.com/58289304/209079731-8f389b4e-dbe5-49f9-9055-a820151020a2.PNG)
-![임시보관 발신 (2)](https://user-images.githubusercontent.com/58289304/209079749-b485a58c-d1b1-41d1-8e63-8f1bbbd4bd12.png)
+![임시보관 발신 (2)](https://user-images.githubusercontent.com/58289304/209080291-cd42dd66-4b6e-43c8-8b7f-b6b55865e32f.png)
+
 
