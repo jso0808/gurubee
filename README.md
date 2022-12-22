@@ -131,9 +131,9 @@
 
 ![문서보기1](https://user-images.githubusercontent.com/58289304/209079460-1ea4497f-5033-41fe-b696-5a13661ca77a.png)
 ![문서보기2](https://user-images.githubusercontent.com/58289304/209079504-d366c82f-a216-4a2d-bd68-37f03af53405.png)
-<img src="https://user-images.githubusercontent.com/58289304/209079529-0b90c367-7831-4bde-a973-5a65516abf8e.png" width="330" height="150"/>
-<img src="https://user-images.githubusercontent.com/58289304/209079555-e46498b5-9ecb-4259-9f54-fcfbd632d32c.png" width="330" height="150"/>
-<img src="https://user-images.githubusercontent.com/58289304/209079575-17d30a3b-b95e-4753-8df9-296f696c77af.png" width="330" height="150"/>
+<img src="https://user-images.githubusercontent.com/58289304/209079529-0b90c367-7831-4bde-a973-5a65516abf8e.png" width="320" height="150"/>
+<img src="https://user-images.githubusercontent.com/58289304/209079555-e46498b5-9ecb-4259-9f54-fcfbd632d32c.png" width="320" height="150"/>
+<img src="https://user-images.githubusercontent.com/58289304/209079575-17d30a3b-b95e-4753-8df9-296f696c77af.png" width="320" height="150"/>
 <br>
 <br>
 <br>
