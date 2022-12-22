@@ -111,8 +111,12 @@
 ![문서구분 ajax2](https://user-images.githubusercontent.com/58289304/209080014-a8cf93ba-7a92-4221-a664-81fe849e2b64.png)
 ![사원검색 ajax](https://user-images.githubusercontent.com/58289304/209080038-accd1c6f-d6b9-45e3-b3d7-4c0c5060ae44.png)
 ![사원검색 ajax2](https://user-images.githubusercontent.com/58289304/209083526-0d41e08b-db48-4030-9643-ad73e02bd4d4.png)
+<br>
+
 ![파일 업로드1](https://user-images.githubusercontent.com/58289304/209080120-d77bc4a2-ed59-4971-9a71-bf416906b5b3.png)
-<img src="https://user-images.githubusercontent.com/58289304/209080139-bef76e7a-6b9b-4a51-915a-6f4ab303db2a.png" width="800" height="300"/>
+<br>
+
+![파일 업로드2](https://user-images.githubusercontent.com/58289304/209080139-bef76e7a-6b9b-4a51-915a-6f4ab303db2a.png)
 <br>
 <br>
 
